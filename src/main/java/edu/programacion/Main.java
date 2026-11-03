@@ -1,50 +1,44 @@
-package edu.programacion;
-
-
-import edu.programacion.ejercicio2501.Cancion;
-import edu.programacion.ejercicio2501.Pelicula;
-import edu.programacion.ejercicio2501.Reproducible;
-import edu.programacion.ejercicio2501.ReproductorMultimedia;
-import edu.programacion.ejercicio2501.Video;
+package edu.programacion.ejercicio2505;
 
 public class Main {
+
     public static void main(String[] args) {
 
+        DataBag bolsa = new DataBag(3);
 
+        // Agregamos distintos tipos de objetos.
+        try {
 
+            bolsa.add("Hola");
+            bolsa.add(25);
+            bolsa.add(3.14);
 
-                ReproductorMultimedia reproductor =
-                        new ReproductorMultimedia();
+            System.out.println("Elementos agregados correctamente.");
 
-                Video video = new Video("Video de prueba");
-                Cancion cancion = new Cancion("Mi canción");
-                Pelicula pelicula = new Pelicula("Mi película");
+            // Intentamos agregar un elemento cuando está llena.
+            bolsa.add("Otro elemento");
 
-                reproductor.cargar(video);
-                reproductor.play();
-                reproductor.mostrarContenido();
+        } catch (FullDataBagException e) {
 
-                System.out.println();
+            System.out.println(e.getMessage());
+        }
 
-                reproductor.cargar(cancion);
-                reproductor.bucle();
-                reproductor.mostrarContenido();
+        System.out.println("\nElementos de la bolsa:");
+        bolsa.mostrarElementos();
 
-                System.out.println();
+        // Eliminamos elementos.
+        try {
 
-                reproductor.stop();
-                reproductor.mostrarContenido();
+            bolsa.remove("Hola");
+            bolsa.remove(25);
+            bolsa.remove(3.14);
 
-                System.out.println();
+            // Intentamos eliminar cuando está vacía.
+            bolsa.remove("Otro elemento");
 
-                reproductor.cargar(pelicula);
-                reproductor.play();
-                reproductor.mostrarContenido();
-            }
+        } catch (EmptyDataBagException e) {
 
-
-
-
-
-
+            System.out.println(e.getMessage());
+        }
+    }
 }
